@@ -8,4 +8,17 @@ src/Parser/lex.yy.cc
 parser
 validate
 tan
+analyse
+dyna
+dynaplan
+hww
+instantiate
+libInst.a
+pddl2lpgp
+pinguplan
+planrec
+relax
+tim
+tofn
+typestrip
 

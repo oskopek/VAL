@@ -237,7 +237,7 @@ void executePlans(int & argc,char * argv[],int & argcount,TypeChecker & tc,const
 		    			if(!Silent && !LaTeX) *report << "Plan valid\n";
 		    			if(LaTeX) *report << "\\\\\n";
 		    			if(!Silent && !LaTeX) *report << "Final value: "; 
-		    			if(Silent > 1 || (!Silent && !LaTeX)) 
+		    			if((!Silent && !LaTeX)) 
 		    			{
 		    				vector<double> vs(pr.getValidator().finalValue());
 		    				for(unsigned int i = 0;i < vs.size();++i)
@@ -259,10 +259,7 @@ void executePlans(int & argc,char * argv[],int & argcount,TypeChecker & tc,const
 		    					*report << vs[i] << " ";
 		    				*report << "\n";
 		    			};
-						if(Silent > 1)
-						{
-							*report << "failed\n";
-						}
+						*report << "failed\n";
 		          };
 		          	if(Verbose)
 		          	{
@@ -272,11 +269,11 @@ void executePlans(int & argc,char * argv[],int & argcount,TypeChecker & tc,const
 		    	else
 		    	{
 		    		failed.push_back(name);
-		    		if(Silent < 2) *report << "Goal not satisfied\n";
-		    		if(Silent > 1) *report << "failed\n";
+		    		*report << "Goal not satisfied\n";
+		    		*report << "failed\n";
 
 		    		if(LaTeX) *report << "\\\\\n";
-		    		if(Silent < 2) *report << "Plan invalid\n";
+		    		*report << "Plan invalid\n";
 				++errorCount;
 			};
 
@@ -290,17 +287,17 @@ void executePlans(int & argc,char * argv[],int & argcount,TypeChecker & tc,const
                      if(LaTeX) *report << "\nPlan failed to execute - checking goal\\\\\n";
                      else 
                      {
-                     	if(Silent < 2) *report << "\nPlan failed to execute - checking goal\n";
-						if(Silent > 1) *report << "failed\n";
+                     	*report << "\nPlan failed to execute - checking goal\n";
+			*report << "failed\n";
 					}
                      if(!pr.getValidator().checkGoal(current_analysis->the_problem->the_goal)) *report << "\nGoal not satisfied\n";
 
          		    }
 
                  else {
-                 	if(Silent < 2) *report << "\nPlan failed to execute\n";
-					if(Silent > 1) *report << "failed\n";
-				}
+                 	*report << "\nPlan failed to execute\n";
+			*report << "failed\n";
+		    }
 
         };
 
@@ -309,7 +306,7 @@ void executePlans(int & argc,char * argv[],int & argcount,TypeChecker & tc,const
 						if(LaTeX)
 							*report << "\\\\\n\\\\\n";
 						else
-							if(Silent < 2) *report << "\n\n";
+							*report << "\n\n";
 
 
 		    			*report << "This plan has the following further condition(s) to check:";
@@ -317,7 +314,7 @@ void executePlans(int & argc,char * argv[],int & argcount,TypeChecker & tc,const
 						if(LaTeX)
 							*report << "\\\\\n\\\\\n";
 						else
-							if(Silent < 2) *report << "\n\n";
+							*report << "\n\n";
 
 						pr.getValidator().displayInvariantWarnings();
 		    		};
@@ -333,7 +330,7 @@ void executePlans(int & argc,char * argv[],int & argcount,TypeChecker & tc,const
 				*report << "Error occurred in validation attempt:\\\\\n  " << e.what() << "\n";
 			}
 			else
-				if(Silent < 2) *report << "Error occurred in validation attempt:\n  " << e.what() << "\n";
+				*report << "Error occurred in validation attempt:\n  " << e.what() << "\n";
 
 			queries.push_back(name);
 
