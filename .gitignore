@@ -3,9 +3,9 @@
 
 # This file is generated
 src/pddl+.cpp
+src/Parser/lex.yy.cc
 
-
-Makefile
 parser
 validate
 tan
+
